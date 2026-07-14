@@ -50,6 +50,7 @@ async def on_ready():
         await client.close()
         return
 
+
     # キーワードチェック
     text = latest.title
 
@@ -68,6 +69,7 @@ async def on_ready():
         await client.close()
         return
 
+
     # タイトルと本文を分離
     if "】" in text:
         title = text.split("】")[0] + "】"
@@ -75,6 +77,7 @@ async def on_ready():
     else:
         title = "プリティストア新着"
         description = text
+
 
     # 本文100文字制限
     description = description[:100]
@@ -85,6 +88,7 @@ async def on_ready():
 
     channel = client.get_channel(CHANNEL_ID)
 
+
     if channel:
         embed = discord.Embed(
             title=f"🌸 {title}",
@@ -92,15 +96,23 @@ async def on_ready():
             url=latest.link
         )
 
+        embed.add_field(
+            name="🔗 投稿URL",
+            value=latest.link,
+            inline=False
+        )
+
         embed.set_footer(
             text="Pretty Store News Bot"
         )
+
 
         await channel.send(embed=embed)
 
         save_last_post(latest.link)
 
         print("送信しました")
+
 
     else:
         print("チャンネルが見つかりません")
