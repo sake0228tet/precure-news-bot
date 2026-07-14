@@ -42,8 +42,6 @@ async def on_ready():
 
     latest = feed.entries[0]
 
-    print(latest)
-    
     # 重複チェック
     last_post = get_last_post()
 
@@ -51,7 +49,6 @@ async def on_ready():
         print("送信済みの投稿です")
         await client.close()
         return
-
 
     # キーワードチェック
     text = latest.title
@@ -71,7 +68,6 @@ async def on_ready():
         await client.close()
         return
 
-
     # タイトルと本文を分離
     if "】" in text:
         title = text.split("】")[0] + "】"
@@ -80,11 +76,11 @@ async def on_ready():
         title = "プリティストア新着"
         description = text
 
-    # 長すぎ防止
+    # 本文100文字制限
     description = description[:100]
 
-if len(description) == 100:
-    description += "..."
+    if len(description) == 100:
+        description += "..."
 
 
     channel = client.get_channel(CHANNEL_ID)
