@@ -81,7 +81,10 @@ async def on_ready():
         description = text
 
     # 長すぎ防止
-    description = description[:2000]
+    description = description[:100]
+
+if len(description) == 100:
+    description += "..."
 
 
     channel = client.get_channel(CHANNEL_ID)
