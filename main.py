@@ -42,6 +42,7 @@ async def on_ready():
 
     latest = feed.entries[0]
 
+    # 重複チェック
     last_post = get_last_post()
 
     if latest.link == last_post:
@@ -49,9 +50,27 @@ async def on_ready():
         await client.close()
         return
 
-    # 投稿内容を分割
+
+    # キーワードチェック
     text = latest.title
 
+    keywords = [
+        "新商品",
+        "再販",
+        "発売",
+        "予約",
+        "販売開始",
+        "登場",
+    ]
+
+    if not any(word in text for word in keywords):
+        print("対象外の投稿です")
+        save_last_post(latest.link)
+        await client.close()
+        return
+
+
+    # タイトルと本文を分離
     if "】" in text:
         title = text.split("】")[0] + "】"
         description = text.split("】", 1)[1].strip()
@@ -59,8 +78,9 @@ async def on_ready():
         title = "プリティストア新着"
         description = text
 
-    # Discord Embed上限対策
-    description = description.split("。")[0] + "。"
+    # 長すぎ防止
+    description = description[:2000]
+
 
     channel = client.get_channel(CHANNEL_ID)
 
@@ -69,12 +89,6 @@ async def on_ready():
             title=f"🌸 {title}",
             description=description,
             url=latest.link
-        )
-
-        embed.add_field(
-            name="🔗 投稿URL",
-            value=latest.link,
-            inline=False
         )
 
         embed.set_footer(
@@ -89,6 +103,7 @@ async def on_ready():
 
     else:
         print("チャンネルが見つかりません")
+
 
     await client.close()
 
