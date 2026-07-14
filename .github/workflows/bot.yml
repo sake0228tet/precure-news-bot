@@ -25,3 +25,11 @@ jobs:
         env:
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
         run: python main.py
+
+      - name: 保存
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add last_post.txt
+          git commit -m "Update last post" || exit 0
+          git push
