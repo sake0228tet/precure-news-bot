@@ -42,6 +42,8 @@ async def on_ready():
 
     latest = feed.entries[0]
 
+    print(latest)
+    
     # 重複チェック
     last_post = get_last_post()
 
