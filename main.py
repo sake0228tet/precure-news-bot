@@ -52,11 +52,23 @@ async def on_ready():
     channel = client.get_channel(CHANNEL_ID)
 
     if channel:
-        await channel.send(
-            f"🌸 プリティストア新着\n\n"
-            f"{latest.title}\n\n"
-            f"{latest.link}"
-        )
+        embed = discord.Embed(
+    title="🌸 プリティストア新着",
+    description=latest.title,
+    url=latest.link
+)
+
+embed.add_field(
+    name="🔗 投稿URL",
+    value=latest.link,
+    inline=False
+)
+
+embed.set_footer(
+    text="Pretty Store News Bot"
+)
+
+await channel.send(embed=embed)
 
         save_last_post(latest.link)
 
