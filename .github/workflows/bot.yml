@@ -1,5 +1,8 @@
 name: Precure News Bot
 
+permissions:
+  contents: write
+
 on:
   schedule:
     - cron: "* * * * *"
