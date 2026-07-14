@@ -1,27 +1,35 @@
 import discord
 import os
 import feedparser
+import json
 
 TOKEN = os.getenv("DISCORD_TOKEN")
 
 CHANNEL_ID = 1523123948613795974
 
-RSS_URL = "https://rss.app/feeds/1oU4mplx8CJl2VtR.xml"
 
-LAST_POST_FILE = "last_post.txt"
+RSS_URLS = {
+    "プリティストア": "https://rss.app/feeds/1oU4mplx8CJl2VtR.xml",
+    "プリキュアグッズ": "https://rss.app/feeds/ez28j2Uuh4hHxhWr.xml",
+    "プリキュア音楽映像": "https://rss.app/feeds/13HLXlbioVHlU1iT.xml",
+    "アニメ公式": "https://rss.app/feeds/AidDSiGarIONaz7A.xml",
+}
 
 
-def get_last_post():
+LAST_POST_FILE = "last_posts.json"
+
+
+def get_last_posts():
     try:
         with open(LAST_POST_FILE, "r") as f:
-            return f.read().strip()
+            return json.load(f)
     except FileNotFoundError:
-        return ""
+        return {}
 
 
-def save_last_post(url):
+def save_last_posts(data):
     with open(LAST_POST_FILE, "w") as f:
-        f.write(url)
+        json.dump(data, f, indent=2, ensure_ascii=False)
 
 
 intents = discord.Intents.default()
@@ -33,26 +41,15 @@ client = discord.Client(intents=intents)
 async def on_ready():
     print(f"{client.user} が起動しました！")
 
-    feed = feedparser.parse(RSS_URL)
+    last_posts = get_last_posts()
 
-    if not feed.entries:
-        print("RSS取得失敗")
+    channel = client.get_channel(CHANNEL_ID)
+
+    if not channel:
+        print("チャンネルが見つかりません")
         await client.close()
         return
 
-    latest = feed.entries[0]
-
-    # 重複チェック
-    last_post = get_last_post()
-
-    if latest.link == last_post:
-        print("送信済みの投稿です")
-        await client.close()
-        return
-
-
-    # キーワードチェック
-    text = latest.title
 
     keywords = [
         "新商品",
@@ -63,38 +60,60 @@ async def on_ready():
         "登場",
     ]
 
-    if not any(word in text for word in keywords):
-        print("対象外の投稿です")
-        save_last_post(latest.link)
-        await client.close()
-        return
+
+    for name, url in RSS_URLS.items():
+
+        feed = feedparser.parse(url)
+
+        if not feed.entries:
+            print(f"{name}: RSS取得失敗")
+            continue
 
 
-    # タイトルと本文を分離
-    if "】" in text:
-        title = text.split("】")[0] + "】"
-        description = text.split("】", 1)[1].strip()
-    else:
-        title = "プリティストア新着"
-        description = text
+        latest = feed.entries[0]
 
 
-    # 本文100文字制限
-    description = description[:100]
-
-    if len(description) == 100:
-        description += "..."
+        if latest.link == last_posts.get(name):
+            print(f"{name}: 送信済み")
+            continue
 
 
-    channel = client.get_channel(CHANNEL_ID)
+        text = latest.title
 
 
-    if channel:
+        if not any(word in text for word in keywords):
+            print(f"{name}: 対象外")
+            last_posts[name] = latest.link
+            continue
+
+
+        if "】" in text:
+            title = text.split("】")[0] + "】"
+            description = text.split("】", 1)[1].strip()
+        else:
+            title = "プリキュア新着情報"
+            description = text
+
+
+        description = description[:100]
+
+        if len(description) == 100:
+            description += "..."
+
+
         embed = discord.Embed(
             title=f"🌸 {title}",
             description=description,
             url=latest.link
         )
+
+
+        embed.add_field(
+            name="📢 情報元",
+            value=name,
+            inline=False
+        )
+
 
         embed.add_field(
             name="🔗 投稿URL",
@@ -102,21 +121,21 @@ async def on_ready():
             inline=False
         )
 
+
         embed.set_footer(
-            text="Pretty Store News Bot"
+            text="Pretty Cure News Bot"
         )
 
 
         await channel.send(embed=embed)
 
-        save_last_post(latest.link)
-
-        print("送信しました")
+        print(f"{name}: 送信しました")
 
 
-    else:
-        print("チャンネルが見つかりません")
+        last_posts[name] = latest.link
 
+
+    save_last_posts(last_posts)
 
     await client.close()
 
