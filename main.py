@@ -10,9 +10,9 @@ CHANNEL_ID = 1523123948613795974
 
 RSS_URLS = {
     "プリティストア": "https://rss.app/feeds/1oU4mplx8CJl2VtR.xml",
-    "プリキュアグッズ": "https://rss.app/feeds/ez28j2Uuh4hHxhWr.xml",
-    "プリキュア音楽映像": "https://rss.app/feeds/13HLXlbioVHlU1iT.xml",
-    "アニメ公式": "https://rss.app/feeds/AidDSiGarIONaz7A.xml",
+    "プリキュアグッズ&情報": "https://rss.app/feeds/ez28j2Uuh4hHxhWr.xml",
+    "プリキュア音楽&映像商品公式": "https://rss.app/feeds/13HLXlbioVHlU1iT.xml",
+    "プリキュア アニメ公式": "https://rss.app/feeds/AidDSiGarIONaz7A.xml",
 }
 
 
