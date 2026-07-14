@@ -60,7 +60,7 @@ async def on_ready():
         description = text
 
     # Discord Embed上限対策
-    description = description[:2000]
+    description = description.split("。")[0] + "。"
 
     channel = client.get_channel(CHANNEL_ID)
 
