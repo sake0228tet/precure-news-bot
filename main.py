@@ -49,12 +49,25 @@ async def on_ready():
         await client.close()
         return
 
+    # 投稿内容を分割
+    text = latest.title
+
+    if "】" in text:
+        title = text.split("】")[0] + "】"
+        description = text.split("】", 1)[1].strip()
+    else:
+        title = "プリティストア新着"
+        description = text
+
+    # Discord Embed上限対策
+    description = description[:2000]
+
     channel = client.get_channel(CHANNEL_ID)
 
     if channel:
         embed = discord.Embed(
-            title="🌸 プリティストア新着",
-            description=latest.title,
+            title=f"🌸 {title}",
+            description=description,
             url=latest.link
         )
 
