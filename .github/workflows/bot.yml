@@ -13,9 +13,6 @@ jobs:
       - name: リポジトリ取得
         uses: actions/checkout@v4
 
-      - name: ファイル確認
-        run: ls -la
-
       - name: Pythonセットアップ
         uses: actions/setup-python@v5
         with:
