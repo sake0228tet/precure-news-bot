@@ -1,8 +1,5 @@
 name: Precure News Bot
 
-permissions:
-  contents: write
-
 on:
   schedule:
     - cron: "*/5 * * * *"
@@ -29,10 +26,10 @@ jobs:
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
         run: python main.py
 
-        - name: 確認
-  run: |
-    ls
-    git status
+      - name: 確認
+        run: |
+          ls
+          git status
 
       - name: 保存
         run: |
