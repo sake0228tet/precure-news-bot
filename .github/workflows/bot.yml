@@ -2,8 +2,11 @@ name: Precure News Bot
 
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "*/15 * * * *"   # 15分間隔でテスト
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   run-bot:
@@ -12,6 +15,9 @@ jobs:
     steps:
       - name: リポジトリ取得
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: true
 
       - name: Pythonセットアップ
         uses: actions/setup-python@v5
@@ -26,15 +32,14 @@ jobs:
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
         run: python main.py
 
-      - name: 確認
-        run: |
-          ls
-          git status
-
       - name: 保存
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
           git add .
-          git commit -m "Update last posts" || exit 0
-          git push
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update last posts $(date '+%Y-%m-%d %H:%M:%S UTC')"
+            git push
+          fi
