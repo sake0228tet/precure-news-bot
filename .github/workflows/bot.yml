@@ -2,7 +2,7 @@ name: Precure News Bot
 
 on:
   schedule:
-    - cron: "*/15 * * * *"   # 15分間隔でテスト
+    - cron: "*/10 * * * *"   # 15分間隔でテスト
   workflow_dispatch:
 
 permissions:
