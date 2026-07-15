@@ -29,6 +29,11 @@ jobs:
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
         run: python main.py
 
+        - name: 確認
+  run: |
+    ls
+    git status
+
       - name: 保存
         run: |
           git config --global user.name "github-actions"
