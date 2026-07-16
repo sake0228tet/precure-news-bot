@@ -15,7 +15,7 @@ RSS_URLS = {
 }
 
 LAST_POST_FILE="last_posts.json"
-EVENT_FILE="precure_events.json"
+EVENT_FOLDER="precure_events"
 
 def get_last_posts():
     try:
