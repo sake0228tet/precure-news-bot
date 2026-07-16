@@ -3,6 +3,7 @@ import os
 import feedparser
 import json
 from datetime import datetime
+from zoneinfo import Zoneinfo
 
 TOKEN = os.getenv("DISCORD_TOKEN")
 CHANNEL_ID = 1508090733301596283
@@ -110,10 +111,11 @@ async def on_ready():
 
         last_posts[name] = latest.link
     # 今日のプリキュア
-    today = datetime.now().strftime("%Y-%m-%d")
-    md = datetime.now().strftime("%m-%d")
-    month = datetime.now().strftime("%m")
+    now = datetime.now(ZoneInfo("Asia/Tokyo"))
 
+today = now.strftime("%Y-%m-%d")
+md = now.strftime("%m-%d")
+month = now.strftime("%m")
     event_file = f"{EVENT_FOLDER}/{month}.json"
 
     events = None
