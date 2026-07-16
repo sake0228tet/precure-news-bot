@@ -1,5 +1,22 @@
 {
-  "07-16": [
-    "test:HUGっと！プリキュア 第24話放送日"
-  ]
+  "07-16": {
+    "broadcast": [],
+    "birthday": [
+      {
+        "name": "キュアプリズム（虹ヶ丘ましろ）",
+        "special": true
+      }
+    ],
+    "first_transform": []
+  },
+
+  "07-17": {
+    "broadcast": [
+      "○○プリキュア 第25話（2018年）"
+    ],
+    "birthday": [],
+    "first_transform": [
+      "キュア○○（2021年）"
+    ]
+  }
 }
