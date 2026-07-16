@@ -171,24 +171,36 @@
   ]
 },
   "07-18": {
-    "first_transform": [
-      {
-        "civilian_name": "明堂院いつき",
-        "cure_name": "キュアサンシャイン",
-        "series": "ハートキャッチプリキュア！",
-        "episode": 23,
-        "year": 2010
-      }
-    ],
-    "broadcast": [
-      {
-        "series": "トロピカル〜ジュ！プリキュア",
-        "episode": 21,
-        "title": "夏休み！トロピカる部の合宿計画！",
-        "year": 2021
-      }
-    ]
-  },
+  "first_transform": [
+    {
+      "civilian_name": "明堂院いつき",
+      "cure_name": "キュアサンシャイン",
+      "series": "ハートキャッチプリキュア！",
+      "episode": 23,
+      "year": 2010
+    }
+  ],
+  "broadcast": [
+    {
+      "series": "ふたりはプリキュア",
+      "episode": 24,
+      "title": "激突！プリキュアVSイルクーボ",
+      "year": 2004
+    },
+    {
+      "series": "ハートキャッチプリキュア！",
+      "episode": 23,
+      "title": "キュアサンシャイン誕生！",
+      "year": 2010
+    },
+    {
+      "series": "トロピカル〜ジュ！プリキュア",
+      "episode": 21,
+      "title": "夏休み！トロピカる部の合宿計画！",
+      "year": 2021
+    }
+  ]
+},
   "07-20": {
     "birthday": [
       {
