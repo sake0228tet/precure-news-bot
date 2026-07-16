@@ -146,24 +146,24 @@
     ]
   },
   "07-17": {
-    "first_transform": [
-      {
-        "civilian_name": "黒川エレン",
-        "cure_name": "キュアビート",
-        "series": "スイートプリキュア♪",
-        "episode": 22,
-        "year": 2011
-      }
-    ]
-  },
+  "first_transform": [
+    {
+      "civilian_name": "黒川エレン",
+      "cure_name": "キュアビート",
+      "series": "スイートプリキュア♪",
+      "episode": 22,
+      "year": 2011
+    }
+  ],
   "broadcast": [
-  {
-    "series": "スイートプリキュア♪",
-    "episode": 22,
-    "title": "『ララー♪ 魂の調べ、その名はキュアビートニャ！！』",
-    "year": 2011
-  }
-],
+    {
+      "series": "スイートプリキュア♪",
+      "episode": 22,
+      "title": "『ララー♪ 魂の調べ、その名はキュアビートニャ！！』",
+      "year": 2011
+    }
+  ]
+},
   "07-18": {
     "first_transform": [
       {
