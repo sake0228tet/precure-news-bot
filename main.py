@@ -2,6 +2,7 @@ import discord
 import os
 import feedparser
 import json
+from datetime import datetime
 
 TOKEN = os.getenv("DISCORD_TOKEN")
 
@@ -17,19 +18,32 @@ RSS_URLS = {
 
 
 LAST_POST_FILE = "last_posts.json"
+EVENT_FILE = "precure_events.json"
 
 
 def get_last_posts():
     try:
-        with open(LAST_POST_FILE, "r") as f:
+        with open(LAST_POST_FILE, "r", encoding="utf-8") as f:
             return json.load(f)
     except FileNotFoundError:
         return {}
 
 
 def save_last_posts(data):
-    with open(LAST_POST_FILE, "w") as f:
+    with open(LAST_POST_FILE, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
+
+
+def get_today_events():
+    try:
+        with open(EVENT_FILE, "r", encoding="utf-8") as f:
+            data = json.load(f)
+    except FileNotFoundError:
+        return []
+
+    today = datetime.now().strftime("%m-%d")
+
+    return data.get(today, [])
 
 
 intents = discord.Intents.default()
@@ -52,30 +66,30 @@ async def on_ready():
 
 
     keywords = [
-    "新商品",
-    "再販",
-    "発売",
-    "予約",
-    "販売開始",
-    "登場",
-    "事後通販",
-    "誕生日",
-    "配信",
-    "公開",
-    "解禁",
-    "イベント",
-    "キャンペーン",
-    "受注",
-    "受注販売",
-    "受注受付",
-    "上映",
-    "コラボ",
-    "グッズ",
-    "開催",
-    "開始",
-    "決定",
-    "公開",
-]
+        "新商品",
+        "再販",
+        "発売",
+        "予約",
+        "販売開始",
+        "登場",
+        "事後通販",
+        "誕生日",
+        "配信",
+        "公開",
+        "解禁",
+        "イベント",
+        "キャンペーン",
+        "受注",
+        "受注販売",
+        "受注受付",
+        "上映",
+        "コラボ",
+        "グッズ",
+        "開催",
+        "開始",
+        "決定",
+    ]
+
 
     for name, url in RSS_URLS.items():
 
@@ -149,6 +163,26 @@ async def on_ready():
 
 
         last_posts[name] = latest.link
+
+
+    # 今日のプリキュア
+    today = datetime.now().strftime("%Y-%m-%d")
+
+    events = get_today_events()
+
+    if events and last_posts.get("today_precure") != today:
+
+        message = "🌈 今日のプリキュア\n\n"
+
+        for event in events:
+            message += f"・{event}\n"
+
+
+        await channel.send(message)
+
+        print("今日のプリキュア: 送信しました")
+
+        last_posts["today_precure"] = today
 
 
     save_last_posts(last_posts)
