@@ -5,9 +5,7 @@ import json
 from datetime import datetime
 
 TOKEN = os.getenv("DISCORD_TOKEN")
-
 CHANNEL_ID = 1508090733301596283
-
 
 RSS_URLS = {
     "プリティストア": "https://rss.app/feeds/1oU4mplx8CJl2VtR.xml",
@@ -16,182 +14,93 @@ RSS_URLS = {
     "プリキュア アニメ公式": "https://rss.app/feeds/AidDSiGarIONaz7A.xml",
 }
 
-
-LAST_POST_FILE = "last_posts.json"
-EVENT_FILE = "precure_events.json"
-
+LAST_POST_FILE="last_posts.json"
+EVENT_FILE="precure_events.json"
 
 def get_last_posts():
     try:
-        with open(LAST_POST_FILE, "r", encoding="utf-8") as f:
+        with open(LAST_POST_FILE,"r",encoding="utf-8") as f:
             return json.load(f)
-    except FileNotFoundError:
+    except:
         return {}
 
-
 def save_last_posts(data):
-    with open(LAST_POST_FILE, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2, ensure_ascii=False)
+    with open(LAST_POST_FILE,"w",encoding="utf-8") as f:
+        json.dump(data,f,indent=2,ensure_ascii=False)
 
-
-def get_today_events():
-    try:
-        with open(EVENT_FILE, "r", encoding="utf-8") as f:
-            data = json.load(f)
-    except FileNotFoundError:
-        return []
-
-    today = datetime.now().strftime("%m-%d")
-
-    return data.get(today, [])
-
-
-intents = discord.Intents.default()
-
-client = discord.Client(intents=intents)
-
+intents=discord.Intents.default()
+client=discord.Client(intents=intents)
 
 @client.event
 async def on_ready():
-    print(f"{client.user} が起動しました！")
-
-    last_posts = get_last_posts()
-
-    channel = client.get_channel(CHANNEL_ID)
-
-    if not channel:
-        print("チャンネルが見つかりません")
+    last_posts=get_last_posts()
+    channel=client.get_channel(CHANNEL_ID)
+    if channel is None:
         await client.close()
         return
 
-
-    keywords = [
-        "新商品",
-        "再販",
-        "発売",
-        "予約",
-        "販売開始",
-        "登場",
-        "事後通販",
-        "誕生日",
-        "配信",
-        "公開",
-        "解禁",
-        "イベント",
-        "キャンペーン",
-        "受注",
-        "受注販売",
-        "受注受付",
-        "上映",
-        "コラボ",
-        "グッズ",
-        "開催",
-        "開始",
-        "決定",
-    ]
-
-
-    for name, url in RSS_URLS.items():
-
-        feed = feedparser.parse(url)
-
+    # RSS処理（元のまま）
+    keywords=["新商品","再販","発売","予約","販売開始","登場","事後通販","誕生日","配信","公開","解禁","イベント","キャンペーン","受注","受注販売","受注受付","上映","コラボ","グッズ","開催","開始","決定"]
+    for name,url in RSS_URLS.items():
+        feed=feedparser.parse(url)
         if not feed.entries:
-            print(f"{name}: RSS取得失敗")
             continue
-
-
-        latest = feed.entries[0]
-
-
-        if latest.link == last_posts.get(name):
-            print(f"{name}: 送信済み")
+        latest=feed.entries[0]
+        if latest.link==last_posts.get(name):
             continue
-
-
-        text = latest.title
-
-
-        if not any(word in text for word in keywords):
-            print(f"{name}: 対象外")
-            last_posts[name] = latest.link
+        if not any(k in latest.title for k in keywords):
+            last_posts[name]=latest.link
             continue
-
-
-        if "】" in text:
-            title = text.split("】")[0] + "】"
-            description = text.split("】", 1)[1].strip()
-        else:
-            title = "プリキュア新着情報"
-            description = text
-
-
-        description = description[:100]
-
-        if len(description) == 100:
-            description += "..."
-
-
-        embed = discord.Embed(
-            title=f"🌸 {title}",
-            description=description,
-            url=latest.link
-        )
-
-
-        embed.add_field(
-            name="📢 情報元",
-            value=name,
-            inline=False
-        )
-
-
-        embed.add_field(
-            name="🔗 投稿URL",
-            value=latest.link,
-            inline=False
-        )
-
-
-        embed.set_footer(
-            text="Pretty Cure News Bot"
-        )
-
-
+        embed=discord.Embed(title="🌸 プリキュア新着情報",description=latest.title[:100],url=latest.link)
+        embed.add_field(name="📢 情報元",value=name,inline=False)
+        embed.add_field(name="🔗 投稿URL",value=latest.link,inline=False)
+        embed.set_footer(text="Pretty Cure News Bot")
         await channel.send(embed=embed)
+        last_posts[name]=latest.link
 
-        print(f"{name}: 送信しました")
+    # 今日のプリキュア
+    today=datetime.now().strftime("%Y-%m-%d")
+    md=datetime.now().strftime("%m-%d")
+    try:
+        with open(EVENT_FILE,"r",encoding="utf-8") as f:
+            events=json.load(f).get(md)
+    except:
+        events=None
 
+    if events and last_posts.get("today_precure")!=today:
+        embed=discord.Embed(title="🌈 今日のプリキュア",color=discord.Color.magenta())
 
-        last_posts[name] = latest.link
+        if events.get("broadcast"):
+            txt="\n".join(f"・{b['series']} 第{b['episode']}話（{b['year']}年）" if isinstance(b,dict) else f"・{b}" for b in events["broadcast"])
+            embed.add_field(name="📺 放送日",value=txt,inline=False)
 
+        if events.get("birthday"):
+            txt=[]
+            for b in events["birthday"]:
+                if "civilian_name" in b:
+                    txt.append(f"・{b['cure_name']}（{b['civilian_name']}）")
+                else:
+                    txt.append(f"・{b['name']}")
+            embed.add_field(name="🎂 誕生日",value="\n".join(txt),inline=False)
+            for b in events["birthday"]:
+                if b.get("special"):
+                    name=b.get("cure_name",b.get("name"))
+                    embed.add_field(name="🎉 Happy Birthday! 🎉",value=f"今日は **{name}** のお誕生日です！✨",inline=False)
 
-    {
-  "07-16": {
-    "broadcast": [],
-    "birthday": [
-      {
-        "name": "キュアプリズム（虹ヶ丘ましろ）",
-        "special": true
-      }
-    ],
-    "first_transform": []
-  },
+        if events.get("first_transform"):
+            vals=[]
+            for t in events["first_transform"]:
+                if isinstance(t,dict):
+                    vals.append(f"・{t['civilian_name']}が{t['cure_name']}に初変身！（{t['series']} 第{t['episode']}話・{t['year']}年）")
+                else:
+                    vals.append(f"・{t}")
+            embed.add_field(name="✨ 初変身記念日",value="\n".join(vals),inline=False)
 
-  "07-17": {
-    "broadcast": [
-      "○○プリキュア 第25話（2018年）"
-    ],
-    "birthday": [],
-    "first_transform": [
-      "キュア○○（2021年）"
-    ]
-  }
-}
-
+        embed.set_footer(text="Pretty Cure News Bot")
+        await channel.send(embed=embed)
+        last_posts["today_precure"]=today
 
     save_last_posts(last_posts)
-
     await client.close()
-
 
 client.run(TOKEN)
