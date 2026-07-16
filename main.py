@@ -135,12 +135,11 @@ async def on_ready():
 
         # 放送日
         if events.get("broadcast"):
-            txt = "\n".join(
-                f"・{b['series']} 第{b['episode']}話（{b['year']}年）"
-                if isinstance(b, dict)
-                else f"・{b}"
-                for b in events["broadcast"]
-            )
+            txt="\n".join(
+    f"・{b['series']} 第{b['episode']}話\n「{b['title']}」（{b['year']}年）"
+    if isinstance(b,dict) else f"・{b}"
+    for b in events["broadcast"]
+)
 
             embed.add_field(
                 name="📺 放送日",
