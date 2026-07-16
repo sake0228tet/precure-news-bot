@@ -1,1 +1,282 @@
-
+{
+  "07-03": {
+    "first_transform": [
+      {
+        "civilian_name": "花海ことは",
+        "cure_name": "キュアフェリーチェ",
+        "series": "魔法つかいプリキュア！",
+        "episode": 22,
+        "year": 2016
+      }
+    ]
+  },
+  "07-04": {
+    "broadcast": [
+      {
+        "series": "トロピカル〜ジュ！プリキュア",
+        "episode": 19,
+        "title": "まなつパニック！学校の七不思議！",
+        "year": 2021
+      }
+    ]
+  },
+  "07-05": {
+    "first_transform": [
+      {
+        "civilian_name": "紅城トワ",
+        "cure_name": "キュアスカーレット",
+        "series": "Go!プリンセスプリキュア",
+        "episode": 22,
+        "year": 2015
+      }
+    ]
+  },
+  "07-06": {
+    "birthday": [
+      {
+        "cure_name": "キュアウインク",
+        "civilian_name": "蒼風なな"
+      }
+    ],
+    "broadcast": [
+      {
+        "series": "アイドルプリキュア",
+        "episode": 22,
+        "title": "アイドルプリキュアVSズキューンキッス！？",
+        "year": 2025
+      }
+    ]
+  },
+  "07-07": {
+    "birthday": [
+      {
+        "cure_name": "キュアミルキー",
+        "civilian_name": "羽衣ララ"
+      }
+    ],
+    "broadcast": [
+      {
+        "series": "わんだふるぷりきゅあ！",
+        "episode": 23,
+        "title": "願い事はワォ～～～～～ン",
+        "year": 2024
+      }
+    ]
+  },
+  "07-10": {
+    "first_transform": [
+      {
+        "civilian_name": "菓彩あまね",
+        "cure_name": "キュアフィナーレ",
+        "series": "デリシャスパーティ♡プリキュア",
+        "episode": 18,
+        "year": 2022
+      }
+    ]
+  },
+  "07-11": {
+    "birthday": [
+      {
+        "cure_name": "キュアヤムヤム",
+        "civilian_name": "華満らん"
+      }
+    ],
+    "broadcast": [
+      {
+        "series": "トロピカル〜ジュ！プリキュア",
+        "episode": 20,
+        "title": "名探偵みのりん！消えたメロンパン事件！",
+        "year": 2021
+      }
+    ]
+  },
+  "07-12": {
+    "first_transform": [
+      {
+        "civilian_name": "東せつな",
+        "cure_name": "キュアパッション",
+        "series": "フレッシュプリキュア！",
+        "episode": 23,
+        "year": 2009
+      }
+    ]
+  },
+  "07-13": {
+    "broadcast": [
+      {
+        "series": "アイドルプリキュア",
+        "episode": 23,
+        "title": "これが私のサイン！",
+        "year": 2025
+      }
+    ]
+  },
+  "07-15": {
+    "birthday": [
+      {
+        "cure_name": "キュアマシェリ",
+        "civilian_name": "愛崎えみる"
+      }
+    ]
+  },
+  "07-16": {
+    "birthday": [
+      {
+        "cure_name": "キュアプリズム",
+        "civilian_name": "虹ヶ丘ましろ",
+        "special": true
+      }
+    ],
+    "first_transform": [
+      {
+        "civilian_name": "キラ星シエル",
+        "cure_name": "キュアパルフェ",
+        "series": "キラキラ☆プリキュアアラモード",
+        "episode": 23,
+        "year": 2017
+      }
+    ],
+    "broadcast": [
+      {
+        "series": "ひろがるスカイ！プリキュア",
+        "episode": 24,
+        "title": "輝く一番星☆エルちゃんの秘密",
+        "year": 2023
+      }
+    ]
+  }
+"07-17": {
+    "first_transform": [
+      {
+        "civilian_name": "黒川エレン",
+        "cure_name": "キュアビート",
+        "series": "スイートプリキュア♪",
+        "episode": 22,
+        "year": 2011
+      }
+    ]
+  },
+  "07-18": {
+    "first_transform": [
+      {
+        "civilian_name": "明堂院いつき",
+        "cure_name": "キュアサンシャイン",
+        "series": "ハートキャッチプリキュア！",
+        "episode": 23,
+        "year": 2010
+      }
+    ],
+    "broadcast": [
+      {
+        "series": "トロピカル〜ジュ！プリキュア",
+        "episode": 21,
+        "title": "夏休み！トロピカる部の合宿計画！",
+        "year": 2021
+      }
+    ]
+  },
+  "07-20": {
+    "birthday": [
+      {
+        "cure_name": "キュアマーメイド",
+        "civilian_name": "海藤みなみ"
+      }
+    ],
+    "broadcast": [
+      {
+        "series": "わんだふるぷりきゅあ！",
+        "episode": 25,
+        "title": "夏だ！海だ！宿題だ！",
+        "year": 2024
+      },
+      {
+        "series": "アイドルプリキュア",
+        "episode": 24,
+        "title": "タナカーンの夏やすみ！",
+        "year": 2025
+      }
+    ]
+  },
+  "07-21": {
+    "broadcast": [
+      {
+        "series": "ひろがるスカイ！プリキュア",
+        "episode": 25,
+        "title": "ワクワク！プリンセス、動物園に行く！",
+        "year": 2023
+      }
+    ]
+  },
+  "07-23": {
+    "broadcast": [
+      {
+        "series": "ひろがるスカイ！プリキュア",
+        "episode": 23,
+        "title": "砕けた夢と、よみがえる力",
+        "year": 2023
+      }
+    ]
+  },
+  "07-24": {
+    "broadcast": [
+      {
+        "series": "わんだふるぷりきゅあ！",
+        "episode": 24,
+        "title": "不思議すぎるたまご",
+        "year": 2024
+      },
+      {
+        "series": "デリシャスパーティ♡プリキュア",
+        "episode": 20,
+        "title": "あまねのマナーレッスン！憧れのレストラン",
+        "year": 2022
+      }
+    ]
+  },
+  "07-27": {
+    "broadcast": [
+      {
+        "series": "アイドルプリキュア",
+        "episode": 25,
+        "title": "ひまわり畑でウインクして",
+        "year": 2025
+      }
+    ]
+  },
+  "07-28": {
+    "broadcast": [
+      {
+        "series": "わんだふるぷりきゅあ！",
+        "episode": 26,
+        "title": "暑すぎてヤバい！",
+        "year": 2024
+      }
+    ]
+  },
+  "07-30": {
+    "birthday": [
+      {
+        "cure_name": "キュアパルフェ",
+        "civilian_name": "キラ星シエル"
+      }
+    ],
+    "broadcast": [
+      {
+        "series": "ひろがるスカイ！プリキュア",
+        "episode": 26,
+        "title": "テイクオフ！飛行機でつながる想い",
+        "year": 2023
+      }
+    ]
+  },
+  "07-31": {
+    "broadcast": [
+      {
+        "series": "デリシャスパーティ♡プリキュア",
+        "episode": 21,
+        "title": "この味を守りたい…！らんの和菓子大作戦",
+        "year": 2022
+      }
+    ]
+  }
+}
