@@ -165,24 +165,28 @@ async def on_ready():
         last_posts[name] = latest.link
 
 
-    # 今日のプリキュア
-    today = datetime.now().strftime("%Y-%m-%d")
+    {
+  "07-16": {
+    "broadcast": [],
+    "birthday": [
+      {
+        "name": "キュアプリズム（虹ヶ丘ましろ）",
+        "special": true
+      }
+    ],
+    "first_transform": []
+  },
 
-    events = get_today_events()
-
-    if events and last_posts.get("today_precure") != today:
-
-        message = "🌈 今日のプリキュア\n\n"
-
-        for event in events:
-            message += f"・{event}\n"
-
-
-        await channel.send(message)
-
-        print("今日のプリキュア: 送信しました")
-
-        last_posts["today_precure"] = today
+  "07-17": {
+    "broadcast": [
+      "○○プリキュア 第25話（2018年）"
+    ],
+    "birthday": [],
+    "first_transform": [
+      "キュア○○（2021年）"
+    ]
+  }
+}
 
 
     save_last_posts(last_posts)
