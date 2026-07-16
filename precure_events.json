@@ -1,22 +1,39 @@
 {
   "07-16": {
-    "broadcast": [],
-    "birthday": [
+    "broadcast": [
       {
-        "name": "キュアプリズム（虹ヶ丘ましろ）",
-        "special": true
+        "series": "ひろがるスカイ！プリキュア",
+        "episode": 24,
+        "year": 2023
+      },
+      {
+        "series": "ＨＵＧっと！プリキュア",
+        "episode": 23,
+        "year": 2018
       }
     ],
-    "first_transform": []
-  },
 
-  "07-17": {
-    "broadcast": [
-      "○○プリキュア 第25話（2018年）"
+    "birthday": [
+      {
+        "cure_name": "キュアプリズム",
+        "civilian_name": "虹ヶ丘ましろ",
+        "special": true
+      },
+      {
+        "cure_name": "キュア○○",
+        "civilian_name": "○○○○",
+        "special": false
+      }
     ],
-    "birthday": [],
+
     "first_transform": [
-      "キュア○○（2021年）"
+      {
+        "cure_name": "キュアプリズム",
+        "civilian_name": "虹ヶ丘ましろ",
+        "series": "ひろがるスカイ！プリキュア",
+        "episode": 1,
+        "year": 2023
+      }
     ]
   }
 }
