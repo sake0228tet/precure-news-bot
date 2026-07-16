@@ -61,12 +61,17 @@ async def on_ready():
     # 今日のプリキュア
     today=datetime.now().strftime("%Y-%m-%d")
     md=datetime.now().strftime("%m-%d")
-    try:
-        with open(EVENT_FILE,"r",encoding="utf-8") as f:
-            events=json.load(f).get(md)
-    except:
-        events=None
+    month = datetime.now().strftime("%m")
+event_file = f"{EVENT_FOLDER}/{month}.json"
 
+try:
+    with open(event_file, "r", encoding="utf-8") as f:
+        events = json.load(f).get(md)
+except FileNotFoundError:
+    events = None
+except json.JSONDecodeError:
+    print(f"{event_file} のJSON形式が正しくありません")
+    events = None
     if events and last_posts.get("today_precure")!=today:
         embed=discord.Embed(title="🌈 今日のプリキュア",color=discord.Color.magenta())
 
