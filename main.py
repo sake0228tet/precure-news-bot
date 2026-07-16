@@ -111,23 +111,23 @@ async def on_ready():
 
         last_posts[name] = latest.link
     # 今日のプリキュア
+    # 今日のプリキュア
     now = datetime.now(ZoneInfo("Asia/Tokyo"))
 
-today = now.strftime("%Y-%m-%d")
-md = now.strftime("%m-%d")
-month = now.strftime("%m")
+    today = now.strftime("%Y-%m-%d")
+    md = now.strftime("%m-%d")
+    month = now.strftime("%m")
+
     event_file = f"{EVENT_FOLDER}/{month}.json"
 
-    events = None
-
-    if os.path.exists(event_file):
-        try:
-            with open(event_file, "r", encoding="utf-8") as f:
-                events = json.load(f).get(md)
-
-        except json.JSONDecodeError:
-            print(f"{event_file} のJSON形式が正しくありません")
-            events = None
+    try:
+        with open(event_file, "r", encoding="utf-8") as f:
+            events = json.load(f).get(md)
+    except FileNotFoundError:
+        events = None
+    except json.JSONDecodeError:
+        print(f"{event_file} のJSON形式が正しくありません")
+        events = None
 
     if events and last_posts.get("today_precure") != today:
         embed = discord.Embed(
