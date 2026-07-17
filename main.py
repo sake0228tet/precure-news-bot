@@ -16,7 +16,10 @@ RSS_URLS = {
 }
 
 LAST_POST_FILE = "last_posts.json"
-EVENT_FOLDER = "precure_events"
+
+BROADCAST_FOLDER = "data/broadcast"
+BIRTHDAY_FILE = "data/birthdays.json"
+TRANSFORM_FILE = "data/first_transform.json"
 
 
 def get_last_posts():
@@ -29,15 +32,66 @@ def get_last_posts():
 
 def save_last_posts(data):
     with open(LAST_POST_FILE, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2, ensure_ascii=False)
+        json.dump(
+            data,
+            f,
+            indent=2,
+            ensure_ascii=False
+        )
 
 
-intents = discord.Intents.default()
+# 放送回検索
+def load_broadcasts(today):
+    results = []
+
+    if not os.path.exists(BROADCAST_FOLDER):
+        return results
+
+    for file in os.listdir(BROADCAST_FOLDER):
+        if not file.endswith(".json"):
+            continue
+
+        path = os.path.join(BROADCAST_FOLDER, file)
+
+        with open(path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+
+        for episode in data:
+            if episode.get("broadcast_date") == today:
+                results.append(episode)
+
+    return results
+
+
+# 誕生日検索
+def load_birthdays(md):
+    try:
+        with open(BIRTHDAY_FILE, "r", encoding="utf-8") as f:
+            data = json.load(f)
+
+        return data.get(md, [])
+
+    except (FileNotFoundError, json.JSONDecodeError):
+        return []
+
+
+# 初変身検索
+def load_transformations(md):
+    try:
+        with open(TRANSFORM_FILE, "r", encoding="utf-8") as f:
+            data = json.load(f)
+
+        return data.get(md, [])
+
+    except (FileNotFoundError, json.JSONDecodeError):
+        return []
+        intents = discord.Intents.default()
 client = discord.Client(intents=intents)
 
 
 @client.event
 async def on_ready():
+
     last_posts = get_last_posts()
 
     channel = client.get_channel(CHANNEL_ID)
@@ -45,6 +99,7 @@ async def on_ready():
     if channel is None:
         await client.close()
         return
+
 
     # RSS新着処理
     keywords = [
@@ -72,7 +127,9 @@ async def on_ready():
         "決定",
     ]
 
+
     for name, url in RSS_URLS.items():
+
         feed = feedparser.parse(url)
 
         if not feed.entries:
@@ -83,9 +140,11 @@ async def on_ready():
         if latest.link == last_posts.get(name):
             continue
 
+
         if not any(k in latest.title for k in keywords):
             last_posts[name] = latest.link
             continue
+
 
         embed = discord.Embed(
             title="🌸 プリキュア新着情報",
@@ -93,54 +152,70 @@ async def on_ready():
             url=latest.link,
         )
 
+
         embed.add_field(
             name="📢 情報元",
             value=name,
-            inline=False,
+            inline=False
         )
+
 
         embed.add_field(
             name="🔗 投稿URL",
             value=latest.link,
-            inline=False,
+            inline=False
         )
 
-        embed.set_footer(text="Pretty Cure News Bot")
+
+        embed.set_footer(
+            text="Pretty Cure News Bot"
+        )
+
 
         await channel.send(embed=embed)
 
         last_posts[name] = latest.link
+
+
+
     # 今日のプリキュア
-    now = datetime.now(ZoneInfo("Asia/Tokyo"))
+
+    now = datetime.now(
+        ZoneInfo("Asia/Tokyo")
+    )
 
     today = now.strftime("%Y-%m-%d")
     md = now.strftime("%m-%d")
-    month = now.strftime("%m")
 
-    event_file = f"{EVENT_FOLDER}/{month}.json"
 
-    try:
-        with open(event_file, "r", encoding="utf-8") as f:
-            events = json.load(f).get(md)
-    except FileNotFoundError:
-        events = None
-    except json.JSONDecodeError:
-        print(f"{event_file} のJSON形式が正しくありません")
-        events = None
+    broadcasts = load_broadcasts(today)
+    birthdays = load_birthdays(md)
+    transforms = load_transformations(md)
 
-    if events and last_posts.get("today_precure") != today:
+
+
+    if (
+        (broadcasts or birthdays or transforms)
+        and last_posts.get("today_precure") != today
+    ):
+
+
         embed = discord.Embed(
             title="🌈 今日のプリキュア",
             color=discord.Color.magenta()
         )
 
+
         # 放送日
-        if events.get("broadcast"):
+
+        if broadcasts:
+
             txt = "\n".join(
-                f"・{b['series']} 第{b['episode']}話\n「{b['title']}」（{b['year']}年）"
-                if isinstance(b, dict) else f"・{b}"
-                for b in events["broadcast"]
+                f"・{b['series']} 第{b['episode']}話\n"
+                f"「{b['title']}」（{b['year']}年）"
+                for b in broadcasts
             )
+
 
             embed.add_field(
                 name="📺 放送日",
@@ -148,19 +223,20 @@ async def on_ready():
                 inline=False
             )
 
+
+
         # 誕生日
-        if events.get("birthday"):
+
+        if birthdays:
+
             txt = []
 
-            for b in events["birthday"]:
-                if "civilian_name" in b:
-                    txt.append(
-                        f"・{b['cure_name']}（{b['civilian_name']}）"
-                    )
-                else:
-                    txt.append(
-                        f"・{b['name']}"
-                    )
+            for b in birthdays:
+
+                txt.append(
+                    f"・{b['cure_name']}（{b['civilian_name']}）"
+                )
+
 
             embed.add_field(
                 name="🎂 誕生日",
@@ -168,43 +244,47 @@ async def on_ready():
                 inline=False
             )
 
-            for b in events["birthday"]:
-                if b.get("special"):
-                    name = b.get("cure_name", b.get("name"))
 
-                    embed.add_field(
-                        name="🎉 Happy Birthday! 🎉",
-                        value=f"今日は **{name}** のお誕生日です！✨",
-                        inline=False
-                    )
 
-        # 初変身記念日
-        if events.get("first_transform"):
-            vals = []
+        # 初変身
 
-            for t in events["first_transform"]:
-                if isinstance(t, dict):
-                    vals.append(
-                        f"・{t['civilian_name']}が{t['cure_name']}に初変身！"
-                        f"（{t['series']} 第{t['episode']}話・{t['year']}年）"
-                    )
-                else:
-                    vals.append(f"・{t}")
+        if transforms:
+
+            txt = []
+
+            for t in transforms:
+
+                txt.append(
+                    f"・{t['civilian_name']}が"
+                    f"{t['cure_name']}に初変身！"
+                    f"（{t['series']} 第{t['episode']}話・{t['year']}年）"
+                )
+
 
             embed.add_field(
                 name="✨ 初変身記念日",
-                value="\n".join(vals),
+                value="\n".join(txt),
                 inline=False
             )
 
-        embed.set_footer(text="Pretty Cure News Bot")
+
+        embed.set_footer(
+            text="Pretty Cure News Bot"
+        )
+
 
         await channel.send(embed=embed)
 
+
         last_posts["today_precure"] = today
+
+
 
     save_last_posts(last_posts)
 
+
     await client.close()
+
+
 
 client.run(TOKEN)
