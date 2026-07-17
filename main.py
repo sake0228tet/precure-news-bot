@@ -76,26 +76,24 @@ def load_birthdays(md):
 
 
 # 初変身検索
-def load_transformations(md):
+def get_last_posts():
     try:
-        with open(TRANSFORM_FILE, "r", encoding="utf-8") as f:
-            data = json.load(f)
-
-        return data.get(md, [])
-
+        with open(LAST_POST_FILE, "r", encoding="utf-8") as f:
+            return json.load(f)
     except (FileNotFoundError, json.JSONDecodeError):
-        return []
-        intents = discord.Intents.default()
+        return {}
+
+
+intents = discord.Intents.default()
+
 client = discord.Client(intents=intents)
 
 
 @client.event
 async def on_ready():
-
     last_posts = get_last_posts()
 
     channel = client.get_channel(CHANNEL_ID)
-
     if channel is None:
         await client.close()
         return
