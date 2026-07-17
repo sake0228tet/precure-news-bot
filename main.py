@@ -50,7 +50,7 @@ def save_last_posts(data):
 
 
 # 放送回検索
-def load_broadcasts(today):
+def load_broadcasts(md):
 
     results = []
 
@@ -76,12 +76,10 @@ def load_broadcasts(today):
 
         for episode in data:
 
-            if episode.get("broadcast_date") == today:
+            if episode.get("broadcast_date", "")[5:] == md:
                 results.append(episode)
 
     return results
-
-
 # 誕生日検索
 def load_birthdays(md):
 
