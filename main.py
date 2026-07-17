@@ -217,7 +217,7 @@ async def on_ready():
     today = now.strftime("%Y-%m-%d")
     md = now.strftime("%m-%d")
 
-    broadcasts = load_broadcasts(today)
+    broadcasts = load_broadcasts(md)
     birthdays = load_birthdays(md)
     transformations = load_transformations(md)
 
