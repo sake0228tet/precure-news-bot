@@ -1,0 +1,345 @@
+ [
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 1,
+    "title": "地球が大ピンチ！残された最後のプリキュア！！",
+    "broadcast_date": "2013-02-03",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 2,
+    "title": "ガーン！キュアハートの正体がバレちゃった！！",
+    "broadcast_date": "2013-02-10",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 3,
+    "title": "最高の相棒登場！キュアダイヤモンド!!",
+    "broadcast_date": "2013-02-17",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 4,
+    "title": "お断りしますわ！私、プリキュアになりません！！",
+    "broadcast_date": "2013-02-24",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 5,
+    "title": "うそ！キュアソードってあの子なの？？",
+    "broadcast_date": "2013-03-03",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 6,
+    "title": "ビックリ！私のお家にまこぴーがくる!?",
+    "broadcast_date": "2013-03-10",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 7,
+    "title": "ギリギリの戦い！さらば、プリキュア!!",
+    "broadcast_date": "2013-03-17",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 8,
+    "title": "きゅぴらっぱ～！ふしぎ赤ちゃん誕生!!",
+    "broadcast_date": "2013-03-24",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 9,
+    "title": "ハチャメチャ！アイちゃん学校にいく!!",
+    "broadcast_date": "2013-03-31",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 10,
+    "title": "転校生は、国民的スーパーアイドル！！",
+    "broadcast_date": "2013-04-07",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 11,
+    "title": "めざめよ！プリキュアの新たなる力！",
+    "broadcast_date": "2013-04-14",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 12,
+    "title": "マナの決意！あたし弟子をとります！",
+    "broadcast_date": "2013-04-21",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 13,
+    "title": "ついに発見!?　王女様の手がかり！",
+    "broadcast_date": "2013-04-28",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 14,
+    "title": "夢か約束か！六花おおいに悩む！",
+    "broadcast_date": "2013-05-05",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 15,
+    "title": "大いそがし！真琴のアイドルな日々！",
+    "broadcast_date": "2013-05-12",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 16,
+    "title": "レジーナ猛アタック！マナはあたしのモノ！",
+    "broadcast_date": "2013-05-19",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 17,
+    "title": "ショック！奪われたクリスタル！",
+    "broadcast_date": "2013-05-26",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 18,
+    "title": "出現！さいごのロイヤルクリスタル！",
+    "broadcast_date": "2013-06-02",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 19,
+    "title": "クリスタルをかけて！ジコチューのゲーム！",
+    "broadcast_date": "2013-06-09",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 20,
+    "title": "クリスタルの導き！王女様のもとへ！",
+    "broadcast_date": "2013-06-16",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 21,
+    "title": "トランプ王国へ！王女様を救え！",
+    "broadcast_date": "2013-06-23",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 22,
+    "title": "ピンチに登場！新たな戦士キュアエース！",
+    "broadcast_date": "2013-06-30",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 23,
+    "title": "愛を取り戻せ！プリキュア5つの誓い！",
+    "broadcast_date": "2013-07-07",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 24,
+    "title": "衝撃！まこぴーアイドル引退宣言！",
+    "broadcast_date": "2013-07-14",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 25,
+    "title": "華麗な変身！ニューヒロイン登場！？",
+    "broadcast_date": "2013-07-21",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 26,
+    "title": "ホントの気持ちは？六花またまた悩む！",
+    "broadcast_date": "2013-07-28",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 27,
+    "title": "バレちゃった！？キュアエースの弱点！",
+    "broadcast_date": "2013-08-04",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 28,
+    "title": "胸がドキドキ！亜久里の夏休み！",
+    "broadcast_date": "2013-08-11",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 29,
+    "title": "マナのために！シャルル大変身！",
+    "broadcast_date": "2013-08-18",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 30,
+    "title": "最後の試練！伝説のプリキュア！",
+    "broadcast_date": "2013-09-03",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 31,
+    "title": "大貝町大ピンチ！誕生！ラブリーパッド",
+    "broadcast_date": "2013-09-08",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 32,
+    "title": "マナ倒れる！嵐の文化祭",
+    "broadcast_date": "2013-09-15",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 33,
+    "title": "ありすパパ登場！四葉家おとまり会！",
+    "broadcast_date": "2013-09-22",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 34,
+    "title": "ママはチョーたいへん！ふきげんアイちゃん！",
+    "broadcast_date": "2013-09-29",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 35,
+    "title": "いやいやアイちゃん！歯みがき大作戦！",
+    "broadcast_date": "2013-10-06",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 36,
+    "title": "ラケルはりきる！初恋パワー全開！",
+    "broadcast_date": "2013-10-13",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 37,
+    "title": "なおせ好きキライ！ニンジンVS亜久里",
+    "broadcast_date": "2013-10-20",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 38,
+    "title": "ベールのたくらみ！アイちゃんジコチューになる!?",
+    "broadcast_date": "2013-10-27",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 39,
+    "title": "会いに来たよ！レジーナふたたび！",
+    "broadcast_date": "2013-11-10",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 40,
+    "title": "とどけたい思い！まこぴー新曲発表！",
+    "broadcast_date": "2013-11-17",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 41,
+    "title": "ありすの夢！花がつないだともだち",
+    "broadcast_date": "2013-11-24",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 42,
+    "title": "みんなで祝おう！はじめての誕生日！",
+    "broadcast_date": "2013-12-01",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 43,
+    "title": "大切な人へ！亜久里の授業参観！",
+    "broadcast_date": "2013-12-08",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 44,
+    "title": "ジコチューの罠！マナのいないクリスマス！",
+    "broadcast_date": "2013-12-15",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 45,
+    "title": "宿命の対決！エースVSレジーナ！",
+    "broadcast_date": "2013-12-22",
+    "year": 2013
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 46,
+    "title": "エースとレジーナ！誕生の真実！",
+    "broadcast_date": "2014-01-05",
+    "year": 2014
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 47,
+    "title": "キュアハートの決意！まもりたい約束！",
+    "broadcast_date": "2014-01-12",
+    "year": 2014
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 48,
+    "title": "ドキドキ全開！プリキュアVSキングジコチュー！",
+    "broadcast_date": "2014-01-19",
+    "year": 2014
+  },
+  {
+    "series": "ドキドキ！プリキュア",
+    "episode": 49,
+    "title": "あなたに届け！マイスイートハート！",
+    "broadcast_date": "2014-01-26",
+    "year": 2014
+  }
+]
