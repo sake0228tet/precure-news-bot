@@ -209,6 +209,7 @@ async def on_ready():
         )
 
         last_posts[name] = latest.link
+        save_last_posts(last_posts)
     # 今日のプリキュア
 
     now = datetime.now(
