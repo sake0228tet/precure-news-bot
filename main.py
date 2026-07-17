@@ -243,117 +243,73 @@ async def on_ready():
         last_posts[name] = latest.link
         # 今日のプリキュア
 
-    now = datetime.now(
-        ZoneInfo("Asia/Tokyo")
+now = datetime.now(ZoneInfo("Asia/Tokyo"))
+
+today = now.strftime("%Y-%m-%d")
+md = now.strftime("%m-%d")
+
+broadcasts = load_broadcasts(today)
+birthdays = load_birthdays(md)
+transformations = load_transformations(md)
+
+if (
+    broadcasts
+    or birthdays
+    or transformations
+) and last_posts.get("today_precure") != today:
+
+    embed = discord.Embed(
+        title="🌈 今日のプリキュア",
+        color=discord.Color.magenta()
     )
 
-
-    today = now.strftime("%Y-%m-%d")
-    md = now.strftime("%m-%d")
-
-
-    broadcasts = load_broadcasts(today)
-    birthdays = load_birthdays(md)
-    transforms = load_transformations(md)
-
-
-
-    if (
-        broadcasts
-        or birthdays
-        or transforms
-    ) and last_posts.get("today_precure") != today:
-
-
-        embed = discord.Embed(
-            title="🌈 今日のプリキュア",
-            color=discord.Color.magenta()
+    # 放送日
+    if broadcasts:
+        txt = "\n".join(
+            f"・{b['series']} 第{b['episode']}話\n"
+            f"「{b['title']}」（{b['year']}年）"
+            for b in broadcasts
         )
 
-
-
-        # 放送日
-
-        if broadcasts:
-
-            txt = "\n".join(
-                f"・{b['series']} 第{b['episode']}話\n"
-                f"「{b['title']}」（{b['year']}年）"
-                for b in broadcasts
-            )
-
-
-            embed.add_field(
-                name="📺 放送日",
-                value=txt,
-                inline=False
-            )
-
-
-
-        # 誕生日
-
-        if birthdays:
-
-            txt = []
-
-            for b in birthdays:
-
-                txt.append(
-                    f"・{b['cure_name']}（{b['civilian_name']}）"
-                )
-
-
-            embed.add_field(
-                name="🎂 誕生日",
-                value="\n".join(txt),
-                inline=False
-            )
-
-
-
-        # 初変身
-
-        if transforms:
-
-            txt = []
-
-
-            for t in transforms:
-
-                txt.append(
-                    f"・{t['civilian_name']}が"
-                    f"{t['cure_name']}に初変身！"
-                    f"（{t['series']} 第{t['episode']}話・{t['year']}年）"
-                )
-
-
-            embed.add_field(
-                name="✨ 初変身記念日",
-                value="\n".join(txt),
-                inline=False
-            )
-
-
-
-        embed.set_footer(
-            text="Pretty Cure News Bot"
+        embed.add_field(
+            name="📺 放送日",
+            value=txt,
+            inline=False
         )
 
-
-        await channel.send(
-            embed=embed
+    # 誕生日
+    if birthdays:
+        txt = "\n".join(
+            f"・{b['cure_name']}（{b['character']}）"
+            for b in birthdays
         )
 
+        embed.add_field(
+            name="🎂 誕生日",
+            value=txt,
+            inline=False
+        )
 
-        last_posts["today_precure"] = today
+    # 初変身日
+    if transformations:
+        txt = "\n".join(
+            f"・{t['cure_name']}（{t['character']}）\n"
+            f"『{t['series']}』第{t['episode']}話"
+            for t in transformations
+        )
 
+        embed.add_field(
+            name="✨ 初変身記念日",
+            value=txt,
+            inline=False
+        )
 
+    embed.set_footer(text="Precure News Bot")
 
-    save_last_posts(
-        last_posts
-    )
+    await channel.send(embed=embed)
 
+    last_posts["today_precure"] = today
+    save_last_posts(last_posts)
 
     await client.close()
 
