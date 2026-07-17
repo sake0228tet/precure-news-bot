@@ -265,7 +265,7 @@ async def on_ready():
 
             txt = "\n".join(
                 f"・{t['cure_name']}（{t['character']}）\n"
-                f"『{t['series']}』第{t['episode']}話({t['year']}年)"
+                f"『{t['series']}』({t['year']}年)"
                 for t in transformations
             )
 
