@@ -5,8 +5,10 @@ import json
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
+
 TOKEN = os.getenv("DISCORD_TOKEN")
 CHANNEL_ID = 1508090733301596283
+
 
 RSS_URLS = {
     "プリティストア": "https://rss.app/feeds/1oU4mplx8CJl2VtR.xml",
@@ -14,6 +16,7 @@ RSS_URLS = {
     "プリキュア音楽&映像商品公式": "https://rss.app/feeds/13HLXlbioVHlU1iT.xml",
     "プリキュア アニメ公式": "https://rss.app/feeds/AidDSiGarIONaz7A.xml",
 }
+
 
 LAST_POST_FILE = "last_posts.json"
 
@@ -24,14 +27,24 @@ TRANSFORM_FILE = "data/first_transform.json"
 
 def get_last_posts():
     try:
-        with open(LAST_POST_FILE, "r", encoding="utf-8") as f:
+        with open(
+            LAST_POST_FILE,
+            "r",
+            encoding="utf-8"
+        ) as f:
             return json.load(f)
+
     except (FileNotFoundError, json.JSONDecodeError):
         return {}
 
 
+
 def save_last_posts(data):
-    with open(LAST_POST_FILE, "w", encoding="utf-8") as f:
+    with open(
+        LAST_POST_FILE,
+        "w",
+        encoding="utf-8"
+    ) as f:
         json.dump(
             data,
             f,
@@ -40,66 +53,108 @@ def save_last_posts(data):
         )
 
 
+
 # 放送回検索
 def load_broadcasts(today):
+
     results = []
 
     if not os.path.exists(BROADCAST_FOLDER):
         return results
 
+
     for file in os.listdir(BROADCAST_FOLDER):
+
         if not file.endswith(".json"):
             continue
 
-        path = os.path.join(BROADCAST_FOLDER, file)
 
-        with open(path, "r", encoding="utf-8") as f:
+        path = os.path.join(
+            BROADCAST_FOLDER,
+            file
+        )
+
+
+        with open(
+            path,
+            "r",
+            encoding="utf-8"
+        ) as f:
             data = json.load(f)
 
+
         for episode in data:
+
             if episode.get("broadcast_date") == today:
                 results.append(episode)
 
+
     return results
-
-
-# 誕生日検索
+    # 誕生日検索
 def load_birthdays(md):
+
     try:
-        with open(BIRTHDAY_FILE, "r", encoding="utf-8") as f:
+        with open(
+            BIRTHDAY_FILE,
+            "r",
+            encoding="utf-8"
+        ) as f:
             data = json.load(f)
 
         return data.get(md, [])
+
 
     except (FileNotFoundError, json.JSONDecodeError):
         return []
 
 
+
 # 初変身検索
-def get_last_posts():
+def load_transformations(md):
+
     try:
-        with open(LAST_POST_FILE, "r", encoding="utf-8") as f:
-            return json.load(f)
+        with open(
+            TRANSFORM_FILE,
+            "r",
+            encoding="utf-8"
+        ) as f:
+            data = json.load(f)
+
+        return data.get(md, [])
+
+
     except (FileNotFoundError, json.JSONDecodeError):
-        return {}
+        return []
+
 
 
 intents = discord.Intents.default()
 
-client = discord.Client(intents=intents)
+client = discord.Client(
+    intents=intents
+)
+
 
 
 @client.event
 async def on_ready():
+
     last_posts = get_last_posts()
 
-    channel = client.get_channel(CHANNEL_ID)
+
+    channel = client.get_channel(
+        CHANNEL_ID
+    )
+
+
     if channel is None:
         await client.close()
         return
 
 
+
     # RSS新着処理
+
     keywords = [
         "新商品",
         "再販",
@@ -126,28 +181,38 @@ async def on_ready():
     ]
 
 
+
     for name, url in RSS_URLS.items():
 
         feed = feedparser.parse(url)
 
+
         if not feed.entries:
             continue
 
+
         latest = feed.entries[0]
+
 
         if latest.link == last_posts.get(name):
             continue
 
 
-        if not any(k in latest.title for k in keywords):
+
+        if not any(
+            k in latest.title
+            for k in keywords
+        ):
+
             last_posts[name] = latest.link
             continue
+
 
 
         embed = discord.Embed(
             title="🌸 プリキュア新着情報",
             description=latest.title[:100],
-            url=latest.link,
+            url=latest.link
         )
 
 
@@ -170,17 +235,18 @@ async def on_ready():
         )
 
 
-        await channel.send(embed=embed)
+        await channel.send(
+            embed=embed
+        )
+
 
         last_posts[name] = latest.link
-
-
-
-    # 今日のプリキュア
+        # 今日のプリキュア
 
     now = datetime.now(
         ZoneInfo("Asia/Tokyo")
     )
+
 
     today = now.strftime("%Y-%m-%d")
     md = now.strftime("%m-%d")
@@ -193,15 +259,17 @@ async def on_ready():
 
 
     if (
-        (broadcasts or birthdays or transforms)
-        and last_posts.get("today_precure") != today
-    ):
+        broadcasts
+        or birthdays
+        or transforms
+    ) and last_posts.get("today_precure") != today:
 
 
         embed = discord.Embed(
             title="🌈 今日のプリキュア",
             color=discord.Color.magenta()
         )
+
 
 
         # 放送日
@@ -250,6 +318,7 @@ async def on_ready():
 
             txt = []
 
+
             for t in transforms:
 
                 txt.append(
@@ -266,19 +335,24 @@ async def on_ready():
             )
 
 
+
         embed.set_footer(
             text="Pretty Cure News Bot"
         )
 
 
-        await channel.send(embed=embed)
+        await channel.send(
+            embed=embed
+        )
 
 
         last_posts["today_precure"] = today
 
 
 
-    save_last_posts(last_posts)
+    save_last_posts(
+        last_posts
+    )
 
 
     await client.close()
