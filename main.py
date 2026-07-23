@@ -4,7 +4,6 @@ import feedparser
 import json
 from datetime import datetime
 from zoneinfo import ZoneInfo
-from twikit import GuestClient
 
 TOKEN = os.getenv("DISCORD_TOKEN")
 CHANNEL_ID = 1508090733301596283
